@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inscription</title>
+</head>
+<body>
+
+<form th:action="@{/confirmationInscription}" method="post" th:object="${user}">
+
+    <input th:field="*{id}" type="hidden">
+    <div class="mb-3">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" class="form-control" id="username" th:field="*{username}">
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+    </div>
+    <div class="mb-3">
+        <label for="password">Mot de passe:</label>
+        <input type="password" class="form-control" id="password" th:field="*{password}">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    </div>
+</div>
+    <button class="btn btn-primary" th:text="${'Creer un utilisateur'}"></button>
+
+</form>
+</body>
+</html>
