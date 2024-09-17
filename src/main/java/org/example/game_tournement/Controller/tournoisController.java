@@ -27,8 +27,8 @@ public class tournoisController {
     //Read ALL
     @RequestMapping("/Actualite")
     private String pageActualite(Model model) {
-        List<Article> posts = ArticleService.getAllArticles();
-        model.addAttribute("post", posts);
+        List<Article> articles = ArticleService.getAllArticles();
+        model.addAttribute("articles", articles);
         return "Actualite";
     }
 

@@ -22,25 +22,14 @@ public class AuthController {
         return "Accueil";
     }
 
-    @RequestMapping("/registration")
-    public String inscription(Model model){
-        model.addAttribute("user", new User());
-        return "registration-form";
-    }
-
-    @PostMapping("/registration")
-    public String inscriptionForm(@ModelAttribute("user") User user){
-        authService.register(user);
-        return "redirect:/";
-    }
-
     @RequestMapping("/login")
     public String connexion(Model model){
         return "connexion-form";
     }
 
     @PostMapping("/login")
-    public String connexionForm(@ModelAttribute("username") String username, @ModelAttribute("password") String password){
+    public String connexionForm(@ModelAttribute("username") String username,
+                                @ModelAttribute("password") String password){
         boolean connected = authService.login(username, password);
         if(connected){
             return "redirect:/Actualite";
