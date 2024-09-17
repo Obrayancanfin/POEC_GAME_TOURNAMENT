@@ -2,6 +2,7 @@ package org.example.game_tournement.Controller;
 
 
 
+import jakarta.validation.Valid;
 import org.example.game_tournement.Entity.Article;
 import org.example.game_tournement.Entity.Tournament;
 import org.example.game_tournement.Service.ArticleService;
@@ -9,6 +10,7 @@ import org.example.game_tournement.Service.tournoisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,14 +49,17 @@ public class tournoisController {
     }
 
     @PostMapping("/savetournoi")
-    private String creationTournoi(@ModelAttribute("tournoi") Tournament tournoi) {
+    private String creationTournoi(@Valid @ModelAttribute("tournoi") Tournament tournoi, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "CreationTournoi";
+        }
         tournoisService.addTournament(tournoi);
         return "redirect:/tournois";
     }
 
     //Read One
-    @RequestMapping("detailtournois/{studentID}")
-    public String detail(@PathVariable("studentID") int id, Model model) {
+    @RequestMapping("detailtournois/{tournoiID}")
+    public String detail(@PathVariable("tournoiID") int id, Model model) {
         Tournament tournament = tournoisService.getTournamentById(id);
         model.addAttribute("tournoi", tournament);
         return "detailtournois";
