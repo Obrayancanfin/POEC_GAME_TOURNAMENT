@@ -2,8 +2,8 @@ package org.example.game_tournement.Controller;
 
 
 
+import org.example.game_tournement.Entity.Article;
 import org.example.game_tournement.Entity.Tournament;
-import org.example.game_tournement.Entity.User;
 import org.example.game_tournement.Service.tournoisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +23,10 @@ public class tournoisController {
 
 
     //Read ALL
-    @RequestMapping("/Actualité")
+    @RequestMapping("/Actualite")
     private String pageActualite(Model model) {
-        List<Tournament> tournaments = tournoisService.getAllTournaments();
-        model.addAttribute("tournements", tournaments);
+        List<Article> posts = tournoisService.getAllTournaments();
+        model.addAttribute("post", posts);
         return "Actualite";
     }
 

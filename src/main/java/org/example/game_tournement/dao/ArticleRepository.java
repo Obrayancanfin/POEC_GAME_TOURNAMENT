@@ -1,0 +1,7 @@
+package org.example.game_tournement.dao;
+
+import org.example.game_tournement.Entity.Article;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ArticleRepository extends JpaRepository<Article, Integer> {
+}

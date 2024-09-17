@@ -43,7 +43,7 @@ public class AuthController {
     public String connexionForm(@ModelAttribute("username") String username, @ModelAttribute("password") String password){
         boolean connected = authService.login(username, password);
         if(connected){
-            return "redirect:/";
+            return "redirect:/Actualite";
         }
         return "redirect:/login";
     }
