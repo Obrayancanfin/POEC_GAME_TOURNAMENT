@@ -22,14 +22,13 @@
         <input type="password" class="form-control" id="password" th:field="*{password}">
         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
     </div>
-
     <div class="mb-3">
-        <label for="repeted-password">Repeter le mot de passe:</label>
-        <input type="password" class="form-control" id="repeted-password">
-        <!--<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+        <label for="repeatedPassword">Repeter le mot de passe :</label>
+        <input type="password" class="form-control" id="repeatedPassword" th:field="*{repeatedPassword}">
+        <span th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}"></span>
     </div>
 
-    <button class="btn btn-primary" th:text="${'Creer un utilisateur'}"></button>
+    <button class="btn btn-primary" th:text="${'S''inscrire'}"></button>
 
 </form>
 </body>

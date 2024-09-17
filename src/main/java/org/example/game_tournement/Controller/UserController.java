@@ -31,12 +31,20 @@ public class UserController {
 
     @PostMapping("/confirmationInscription")
     private String confirmationInscription(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()) {
             return "InscriptionUtilisateur";
-        } else {
-            userService.createStudent(user);
+        }else if (!user.getPassword().equals(user.getRepeatedPassword())) {
+            bindingResult.rejectValue("repeatedPassword", "error.repeatedPassword", "Les mots de passe ne correspondent pas.");
+            return "InscriptionUtilisateur";
+        }else{
+            if(userService.getUserByName(user.getUsername()) != null){
+                bindingResult.rejectValue("username", "error.username", "L'utilisateur existe déjà.");
+                return "InscriptionUtilisateur";
+            }else{
+                userService.createUser(user);
+            }
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @RequestMapping("/InscriptionTournois")
