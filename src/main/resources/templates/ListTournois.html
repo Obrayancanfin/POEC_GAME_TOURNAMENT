@@ -3,8 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des tournois</title>
+    <span th:replace="~{Accueil :: bootstrapImports}"></span>
 </head>
 <body>
+<h1>Liste des tournois</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Jeu</th>
+        <th>Date</th>
+        <th>Nombre de places</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tournoi : ${tournois}">
+        <td th:text="${tournoi.name}">Nom du tournoi</td>
+        <td th:text="${tournoi.game}">Nom du jeu</td>
+        <td th:text="${#temporals.format(tournoi.dateTournament, 'dd/MM/yyyy')}">Date</td>
+        <td th:text="${tournoi.numberLimitePlayer}">Nombre de places</td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

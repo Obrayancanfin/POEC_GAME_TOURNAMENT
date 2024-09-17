@@ -4,6 +4,7 @@ package org.example.game_tournement.Controller;
 
 import org.example.game_tournement.Entity.Article;
 import org.example.game_tournement.Entity.Tournament;
+import org.example.game_tournement.Service.ArticleService;
 import org.example.game_tournement.Service.tournoisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,16 @@ public class tournoisController {
     //Read ALL
     @RequestMapping("/Actualite")
     private String pageActualite(Model model) {
-        List<Article> posts = tournoisService.getAllTournaments();
+        List<Article> posts = ArticleService.getAllArticles();
         model.addAttribute("post", posts);
         return "Actualite";
+    }
+
+    @RequestMapping("/tournois")
+    public String listTournaments(Model model) {
+        List<Tournament> tournaments = tournoisService.getAllTournaments();
+        model.addAttribute("tournois", tournaments);
+        return "ListTournois";
     }
 
     //Create
@@ -38,7 +46,7 @@ public class tournoisController {
     }
     @PostMapping("/savetournoi")
     private String creationTournoi(@ModelAttribute("tournoi") Tournament tournoi) {
-        return "Actualite";
+        return "ListTournois";
     }
 
 

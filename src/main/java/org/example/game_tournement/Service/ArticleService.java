@@ -1,9 +1,16 @@
 package org.example.game_tournement.Service;
 
+import org.example.game_tournement.Entity.Article;
+import org.example.game_tournement.Entity.Tournament;
 import org.example.game_tournement.dao.ArticleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ArticleService {
-    private ArticleRepository articleRepository;
+    private static ArticleRepository articleRepository;
+    public static List<Article> getAllArticles() {
+        return articleRepository.findAll();
+    }
 }
