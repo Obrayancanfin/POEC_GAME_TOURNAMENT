@@ -40,6 +40,7 @@ public class tournoisController {
         model.addAttribute("tournois", tournaments);
         return "ListTournois";
     }
+    
 
     //Create
     @RequestMapping("/addtournoi")
