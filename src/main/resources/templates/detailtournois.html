@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du Tournoi</title>
+    <span th:replace="~{Accueil :: bootstrapImports}"></span>
+</head>
+<body>
+<h1>Détails du Tournoi</h1>
+
+<div class="card">
+    <div class="card-header">
+        <h2 th:text="${tournoi.name}">Nom du tournoi</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Jeu:</strong> <span th:text="${tournoi.game}">Nom du jeu</span></p>
+        <p><strong>Date:</strong> <span th:text="${#temporals.format(tournoi.dateTournament, 'dd/MM/yyyy')}">Date du tournoi</span></p>
+        <p><strong>Nombre de places:</strong> <span th:text="${tournoi.numberLimitePlayer}">Nombre de places</span></p>
+        <p><strong>Format:</strong> <span th:text="${tournoi.format}">Format du tournoi</span></p>
+        <p><strong>Règles:</strong></p>
+        <p th:text="${tournoi.rules}">Règles du tournoi</p>
+    </div>
+</div>
+<!--<a href="/tournois" class="btn btn-warning" aria-disabled="true" >Mise à jour </a>-->
+<a th:href="@{/deletetournoi/{id}(id=${tournoi.id})}" class="btn btn-danger">Suppression</a>
+
+
+<a href="/tournois" class="btn btn-primary">Retour à la liste des tournois</a>
+</body>
+</html>
