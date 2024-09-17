@@ -30,10 +30,6 @@
         <input type="password" class="form-control" id="repeatedPassword" th:field="*{repeatedPassword}">
         <span th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}"></span>
 
-        <label for="repetedPassword">Repeter le mot de passe:</label>
-        <input type="password" class="form-control is-valid" id="repetedPassword" th:if="${user.password == user.repeatedPassword}" th:field="*{repeatedPassword}">
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-
     </div>
 
     <button class="btn btn-primary" th:text="${'S''inscrire'}"></button>
