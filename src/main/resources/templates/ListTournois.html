@@ -15,6 +15,7 @@
         <th>Jeu</th>
         <th>Date</th>
         <th>Nombre de places</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -23,9 +24,13 @@
         <td th:text="${tournoi.game}">Nom du jeu</td>
         <td th:text="${#temporals.format(tournoi.dateTournament, 'dd/MM/yyyy')}">Date</td>
         <td th:text="${tournoi.numberLimitePlayer}">Nombre de places</td>
+        <td ><a th:href="@{/detailtournois/{id}(id=${tournoi.getId()})}" class="btn btn-success">Voir détail</a></td>
     </tr>
     </tbody>
 </table>
+
+<a href="/addtournoi" class="btn btn-primary">Création tournoi</a>
+<a href="/" class="btn btn-primary">Accueil</a>
 
 </body>
 </html>
