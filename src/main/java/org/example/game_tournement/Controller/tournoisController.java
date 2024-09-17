@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,8 +27,8 @@ public class tournoisController {
     //Read ALL
     @RequestMapping("/Actualite")
     private String pageActualite(Model model) {
-        List<Article> posts = ArticleService.getAllArticles();
-        model.addAttribute("post", posts);
+        List<Article> articles = ArticleService.getAllArticles();
+        model.addAttribute("articles", articles);
         return "Actualite";
     }
 
@@ -44,15 +45,36 @@ public class tournoisController {
         model.addAttribute("tournoi", new Tournament());
         return "CreationTournoi";
     }
+
     @PostMapping("/savetournoi")
     private String creationTournoi(@ModelAttribute("tournoi") Tournament tournoi) {
-        return "ListTournois";
+        tournoisService.addTournament(tournoi);
+        return "redirect:/tournois";
     }
 
-
     //Read One
+    @RequestMapping("detailtournois/{studentID}")
+    public String detail(@PathVariable("studentID") int id, Model model) {
+        Tournament tournament = tournoisService.getTournamentById(id);
+        model.addAttribute("tournoi", tournament);
+        return "detailtournois";
+    }
 
     //Update
 
     //Delete
+    @RequestMapping("/deletetournoi/{id}")
+    public String showDeleteConfirmation(@PathVariable("id") int id, Model model) {
+        Tournament tournament = tournoisService.getTournamentById(id);
+        model.addAttribute("tournoi", tournament);
+        return "deleteConfirmation";
+    }
+
+    // Supprimer le tournoi
+    @PostMapping("/deletetournoi/{id}")
+    public String deleteTournoi(@PathVariable("id") int id) {
+        Tournament tournament = tournoisService.getTournamentById(id);
+        tournoisService.deleteTournament(tournament);
+        return "redirect:/tournois";
+    }
 }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Creation d'un tournoi</title>
+    <title>Création d'un tournoi</title>
     <span th:replace="~{Accueil :: bootstrapImports}"></span>
 </head>
 <body>
@@ -18,7 +18,19 @@
     <div class="row mb-3">
         <label for="game" class="col-sm-2 col-form-label">Jeux</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="game" th:field="*{game}">
+            <select class="form-select" id="game" th:field="*{game}">
+                <option value="">Choisissez un jeu</option>
+                <option value="League of Legends">League of Legends</option>
+                <option value="Dota 2">Dota 2</option>
+                <option value="Counter-Strike: Global Offensive">Counter-Strike: Global Offensive</option>
+                <option value="Overwatch">Overwatch</option>
+                <option value="Fortnite">Fortnite</option>
+                <option value="Apex Legends">Apex Legends</option>
+                <option value="Valorant">Valorant</option>
+                <option value="Rocket League">Rocket League</option>
+                <option value="FIFA 21">FIFA 21</option>
+                <option value="Super Smash Bros. Ultimate">Super Smash Bros. Ultimate</option>
+            </select>
         </div>
     </div>
     <div class="row mb-3">

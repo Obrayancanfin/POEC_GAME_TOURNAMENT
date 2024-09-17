@@ -8,8 +8,15 @@
     <title>Actualité</title>
 </head>
 <body>
-<table class="table" th:unless="${post.isEmpty()}">
 
+<p th:if="${articles.isEmpty()}">Liste d'article vide !</p>
+<table class="table" th:unless="${articles.isEmpty()}">
+    <tr th:each="article: ${articles}">
+        <td th:text="${article.title}" />
+        <td th:text="${article.category}" />
+        <td th:text="${article.content}" />
+    </tr>
 </table>
+
 </body>
 </html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmation de Suppression</title>
+  <span th:replace="~{Accueil :: bootstrapImports}"></span>
+</head>
+<body>
+<h1>Confirmation de Suppression</h1>
+
+<div class="alert alert-warning">
+  <p>Êtes-vous sûr de vouloir supprimer ce tournoi ?</p>
+  <p><strong>Nom du tournoi :</strong> <span th:text="${tournoi.name}">Nom du tournoi</span></p>
+</div>
+
+<form th:action="@{/deletetournoi/{id}(id=${tournoi.id})}" method="post">
+  <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+  <a href="/tournois" class="btn btn-secondary">Annuler</a>
+</form>
+
+</body>
+</html>
