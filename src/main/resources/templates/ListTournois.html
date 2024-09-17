@@ -29,7 +29,7 @@
     </tbody>
 </table>
 
-<a href="/addtournoi" class="btn btn-primary">Création tournoi</a>
+<a href="/addtournoi" class="btn btn-primary" th:if="${user != null && user.roles.contains('ADMIN')}">Création tournoi</a>
 <a href="/" class="btn btn-primary">Accueil</a>
 
 </body>
