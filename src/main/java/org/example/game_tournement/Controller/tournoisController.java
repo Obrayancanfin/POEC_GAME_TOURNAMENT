@@ -2,10 +2,13 @@ package org.example.game_tournement.Controller;
 
 
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.game_tournement.Entity.Article;
 import org.example.game_tournement.Entity.Tournament;
+import org.example.game_tournement.Entity.User;
 import org.example.game_tournement.Service.ArticleService;
+import org.example.game_tournement.Service.AuthService;
 import org.example.game_tournement.Service.tournoisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,26 +24,39 @@ import java.util.List;
 @Controller
 
 public class tournoisController {
+    @Autowired
+    HttpSession session;
 
     @Autowired
     tournoisService tournoisService;
 
+    @Autowired
+    AuthService authService;
 
     //Read ALL
     @RequestMapping("/Actualite")
     private String pageActualite(Model model) {
-        List<Article> posts = ArticleService.getAllArticles();
-        model.addAttribute("post", posts);
+        List<Article> articles = ArticleService.getAllArticles();
+        model.addAttribute("articles", articles);
+
         return "Actualite";
     }
 
     @RequestMapping("/tournois")
     public String listTournaments(Model model) {
+        System.out.println(authService.isLogged());
         List<Tournament> tournaments = tournoisService.getAllTournaments();
         model.addAttribute("tournois", tournaments);
+        String username = (String) session.getAttribute("username");
+        // Récupérer l'utilisateur depuis le repository
+        User user = authService.getUserByName(username);
+
+        // Ajoutez le nom d'utilisateur et le rôle au modèle
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("roles", user.getRoles());
+        model.addAttribute("isAdmin", "ADMIN".equals(user.getRoles()));
         return "ListTournois";
     }
-    
 
     //Create
     @RequestMapping("/addtournoi")
