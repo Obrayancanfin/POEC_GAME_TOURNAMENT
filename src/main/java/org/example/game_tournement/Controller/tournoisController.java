@@ -38,7 +38,6 @@ public class tournoisController {
     private String pageActualite(Model model) {
         List<Article> articles = ArticleService.getAllArticles();
         model.addAttribute("articles", articles);
-
         return "Actualite";
     }
 
