@@ -3,6 +3,9 @@ package org.example.game_tournement.Controller;
 
 
 import jakarta.servlet.http.HttpSession;
+
+
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.game_tournement.Entity.Article;
 import org.example.game_tournement.Entity.Tournament;
@@ -28,6 +31,9 @@ public class tournoisController {
     HttpSession session;
 
     @Autowired
+    HttpSession session;
+
+    @Autowired
     tournoisService tournoisService;
 
     @Autowired
@@ -40,6 +46,8 @@ public class tournoisController {
         model.addAttribute("articles", articles);
         return "Actualite";
     }
+
+
 
     @RequestMapping("/tournois")
     public String listTournaments(Model model) {
@@ -56,10 +64,11 @@ public class tournoisController {
         model.addAttribute("isAdmin", "ADMIN".equals(user.getRoles()));
         return "ListTournois";
     }
+  
 
     //Create
     @RequestMapping("/addtournoi")
-    private String creationTournoi (Model model) {
+    private String creationTournoi(Model model) {
         model.addAttribute("tournoi", new Tournament());
         return "CreationTournoi";
     }
@@ -98,4 +107,6 @@ public class tournoisController {
         tournoisService.deleteTournament(tournament);
         return "redirect:/tournois";
     }
+
+
 }
