@@ -21,8 +21,7 @@ public class User {
     @NotBlank(message = "Le nom d'utilisateur est obligatoire") 
     private String username;
 
-    @NotBlank(message = "Le mot de passe est obligatoire") @Length(min = 8, max = 40, message = "Le mot de passe doit contenir entre 8 et 40 caractères") @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!.%*?&])[A-Za-z\\d@$!%*.?&]{8,40}$", message = "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial")
-
+    @NotBlank(message = "Le mot de passe est obligatoire") @Length(min = 8, max = 40, message = "Le mot de passe doit contenir entre 8 et 40 caractères") @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!.%*?&])[A-Za-z\\d@$!%*.?&]{8,40}$", message = "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial") 
     private String password;
 
     @Transient private String repeatedPassword; // @Transient --> non-persistence en BDD

@@ -46,23 +46,21 @@ public class tournoisController {
         System.out.println(authService.isLogged());
         List<Tournament> tournaments = tournoisService.getAllTournaments();
         model.addAttribute("tournois", tournaments);
-
-        // Récupérer l'utilisateur connecté
         String username = (String) session.getAttribute("username");
+        // Récupérer l'utilisateur depuis le repository
         User user = authService.getUserByName(username);
 
-        // Ajoutez l'utilisateur au modèle
-        model.addAttribute("user", user);
+        // Ajoutez le nom d'utilisateur et le rôle au modèle
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("roles", user.getRoles());
+        model.addAttribute("isAdmin", "ADMIN".equals(user.getRoles()));
         return "ListTournois";
     }
 
     //Create
     @RequestMapping("/addtournoi")
     private String creationTournoi (Model model) {
-        if (authService.isAdmin()) {
-            model.addAttribute("tournoi", new Tournament());
-            return "CreationTournoi";
-        }
+        model.addAttribute("tournoi", new Tournament());
         return "CreationTournoi";
     }
 
@@ -80,12 +78,6 @@ public class tournoisController {
     public String detail(@PathVariable("tournoiID") int id, Model model) {
         Tournament tournament = tournoisService.getTournamentById(id);
         model.addAttribute("tournoi", tournament);
-        // Récupérer l'utilisateur connecté
-        String username = (String) session.getAttribute("username");
-        User user = authService.getUserByName(username);
-
-        // Ajoutez l'utilisateur au modèle
-        model.addAttribute("user", user);
         return "detailtournois";
     }
 
