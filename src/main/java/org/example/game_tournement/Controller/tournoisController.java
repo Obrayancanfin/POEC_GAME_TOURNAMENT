@@ -1,7 +1,12 @@
 package org.example.game_tournement.Controller;
 
 
+
 import jakarta.servlet.http.HttpSession;
+
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.example.game_tournement.Entity.Article;
 import org.example.game_tournement.Entity.Tournament;
 import org.example.game_tournement.Entity.User;
@@ -11,6 +16,7 @@ import org.example.game_tournement.Service.tournoisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +27,8 @@ import java.util.List;
 @Controller
 
 public class tournoisController {
+    @Autowired
+    HttpSession session;
 
     @Autowired
     HttpSession session;
@@ -39,6 +47,25 @@ public class tournoisController {
         return "Actualite";
     }
 
+
+
+    @RequestMapping("/tournois")
+    public String listTournaments(Model model) {
+        System.out.println(authService.isLogged());
+        List<Tournament> tournaments = tournoisService.getAllTournaments();
+        model.addAttribute("tournois", tournaments);
+        String username = (String) session.getAttribute("username");
+        // Récupérer l'utilisateur depuis le repository
+        User user = authService.getUserByName(username);
+
+        // Ajoutez le nom d'utilisateur et le rôle au modèle
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("roles", user.getRoles());
+        model.addAttribute("isAdmin", "ADMIN".equals(user.getRoles()));
+        return "ListTournois";
+    }
+  
+
     //Create
     @RequestMapping("/addtournoi")
     private String creationTournoi(Model model) {
@@ -47,14 +74,17 @@ public class tournoisController {
     }
 
     @PostMapping("/savetournoi")
-    private String creationTournoi(@ModelAttribute("tournoi") Tournament tournoi) {
+    private String creationTournoi(@Valid @ModelAttribute("tournoi") Tournament tournoi, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "CreationTournoi";
+        }
         tournoisService.addTournament(tournoi);
         return "redirect:/tournois";
     }
 
     //Read One
-    @RequestMapping("detailtournois/{studentID}")
-    public String detail(@PathVariable("studentID") int id, Model model) {
+    @RequestMapping("detailtournois/{tournoiID}")
+    public String detail(@PathVariable("tournoiID") int id, Model model) {
         Tournament tournament = tournoisService.getTournamentById(id);
         model.addAttribute("tournoi", tournament);
         return "detailtournois";
@@ -78,19 +108,5 @@ public class tournoisController {
         return "redirect:/tournois";
     }
 
-    @RequestMapping("/tournois")
-    public String listTournaments(Model model) {
-        System.out.println(authService.isLogged());
-        List<Tournament> tournaments = tournoisService.getAllTournaments();
-        model.addAttribute("tournois", tournaments);
 
-        //A AJOUTER POUR LA GESTION DES ADMIN/USER
-        // Récupérer l'utilisateur connecté
-        String username = (String) session.getAttribute("username");
-        User user = authService.getUserByName(username);
-
-        // Ajoutez l'utilisateur au modèle
-        model.addAttribute("user", user);
-        return "ListTournois";
-    }
 }

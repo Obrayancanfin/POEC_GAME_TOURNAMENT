@@ -2,6 +2,9 @@ package org.example.game_tournement.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+
+import jakarta.validation.constraints.Pattern;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -18,10 +21,8 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull(message="Username is a required field.")
-    @Size(min = 1, max = 32, message="Username must be between 1 and 32 characters.")
+    @NotBlank(message = "Le nom d'utilisateur est obligatoire") 
     private String username;
-
 
     @NotBlank(message = "Le mot de passe est obligatoire")
     @Length(min = 8, max = 40, message = "Le mot de passe doit contenir entre 8 et 40 caractères")
@@ -41,10 +42,14 @@ public class User {
     @Transient
     private String repeatedEmail;
 
+    @Transient private String repeatedPassword; // @Transient --> non-persistence en BDD
+    private String avatarPath; // En partant du principe que l'on stockera les avatars hors BDD pour l'instant (en local dans l'appli)
+
+
     @Builder.Default
     private String roles = "USER";
-
 
     private String avatarPath; // En partant du principe que l'on stockera les avatars hors BDD pour l'instant (en local dans l'appli)
 
 }
+

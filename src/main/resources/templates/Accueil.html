@@ -17,10 +17,23 @@
 
 <h1>Accueil :</h1>
 
-<a href="/InscriptionUtilisateur">S'incrire</a>
+<div>
+    <!-- Vérifiez si username est présent -->
+    <div th:if="${username}">
+        <p>Bienvenue, <span th:text="${username}"></span>!</p>
+        <p>Rôle: <span th:text="${roles}"></span></p>
+        <a class="btn btn-primary" href="/login">Se déconnecter</a>
 
-<a href="/login">Se connecter</a>
-<a href="/tournois">Voir les tournois</a>
+    </div>
+
+    <!-- Affiche les liens si l'utilisateur n'est pas connecté -->
+    <div th:unless="${username}">
+        <a class="btn btn-primary" href="/InscriptionUtilisateur">S'inscrire</a>
+        <a class="btn btn-primary" href="/login">Se connecter</a>
+    </div>
+</div>
+
+<a class="btn btn-primary" href="/tournois">Voir les tournois</a>
 
 </body>
 </html>

@@ -16,10 +16,10 @@ public class UserService {
     }
 
     public User getUserByName(String username) { // To be deprecated
-        return null;
+        return iUserRepository.findByUsername(username);
     }
 
-    public User createStudent(User user) {
+    public User createUser(User user) {
         return iUserRepository.save(user);
     }
 
