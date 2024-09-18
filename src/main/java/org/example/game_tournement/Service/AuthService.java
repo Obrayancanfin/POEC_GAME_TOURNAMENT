@@ -41,7 +41,14 @@ public class AuthService {
         }
     }
 
-
+    public boolean isAdmin() {
+        try {
+            String roles = httpSession.getAttribute("roles").toString();
+            return roles.contains("ADMIN");
+        } catch (Exception ex) {
+            return false;
+        }
+    }
 
     public void logout(){
         httpSession.invalidate();
