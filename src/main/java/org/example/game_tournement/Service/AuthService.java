@@ -41,13 +41,22 @@ public class AuthService {
         }
     }
 
-    public User getUserByName(String username) {
-        return userRepository.findByUsername(username);
-    }
+    public boolean isAdmin() {
+        try {
 
+            String roles = httpSession.getAttribute("roles").toString();
+            System.out.println(roles);
+            return roles.contains("admin");
+        } catch (Exception ex) {
+            return false;
+        }
+    }
 
     public void logout(){
         httpSession.invalidate();
     }
 
+    public User getUserByName(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

@@ -3,9 +3,6 @@ package org.example.game_tournement.Controller;
 
 
 import jakarta.servlet.http.HttpSession;
-
-
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.game_tournement.Entity.Article;
 import org.example.game_tournement.Entity.Tournament;
@@ -31,9 +28,6 @@ public class tournoisController {
     HttpSession session;
 
     @Autowired
-    HttpSession session;
-
-    @Autowired
     tournoisService tournoisService;
 
     @Autowired
@@ -47,30 +41,30 @@ public class tournoisController {
         return "Actualite";
     }
 
-
-
     @RequestMapping("/tournois")
     public String listTournaments(Model model) {
-        System.out.println(authService.isLogged());
         List<Tournament> tournaments = tournoisService.getAllTournaments();
         model.addAttribute("tournois", tournaments);
+
+        // Récupérer l'utilisateur connecté
         String username = (String) session.getAttribute("username");
-        // Récupérer l'utilisateur depuis le repository
         User user = authService.getUserByName(username);
 
-        // Ajoutez le nom d'utilisateur et le rôle au modèle
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("roles", user.getRoles());
-        model.addAttribute("isAdmin", "ADMIN".equals(user.getRoles()));
+        // Ajoutez l'utilisateur au modèle
+        model.addAttribute("user", user);
         return "ListTournois";
     }
-  
 
     //Create
     @RequestMapping("/addtournoi")
-    private String creationTournoi(Model model) {
-        model.addAttribute("tournoi", new Tournament());
-        return "CreationTournoi";
+    private String creationTournoi (Model model) {
+        String username = (String) session.getAttribute("username");
+        User user = authService.getUserByName(username);
+        if (user.getRoles().equals("ADMIN")) {
+            model.addAttribute("tournoi", new Tournament());
+            return "CreationTournoi";
+        }
+        return "redirect:/Actualite";
     }
 
     @PostMapping("/savetournoi")
@@ -87,6 +81,12 @@ public class tournoisController {
     public String detail(@PathVariable("tournoiID") int id, Model model) {
         Tournament tournament = tournoisService.getTournamentById(id);
         model.addAttribute("tournoi", tournament);
+        // Récupérer l'utilisateur connecté
+        String username = (String) session.getAttribute("username");
+        User user = authService.getUserByName(username);
+
+        // Ajoutez l'utilisateur au modèle
+        model.addAttribute("user", user);
         return "detailtournois";
     }
 
@@ -107,6 +107,4 @@ public class tournoisController {
         tournoisService.deleteTournament(tournament);
         return "redirect:/tournois";
     }
-
-
 }
