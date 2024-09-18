@@ -8,7 +8,9 @@
 <body>
 <h1>Liste des tournois</h1>
 
+
 <table class="table">
+
     <thead>
     <tr>
         <th>Nom</th>
@@ -29,7 +31,9 @@
     </tbody>
 </table>
 
+
 <a href="/addtournoi" class="btn btn-primary" th:if="${user != null && user.roles.contains('ADMIN')}">Création tournoi</a>
+
 <a href="/" class="btn btn-primary">Accueil</a>
 
 </body>
