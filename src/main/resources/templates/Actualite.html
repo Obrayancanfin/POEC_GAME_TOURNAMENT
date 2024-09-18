@@ -5,11 +5,20 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <span th:replace="~{Accueil :: bootstrapImports}"></span>
     <title>Actualité</title>
 </head>
 <body>
-<table class="table" th:unless="${post.isEmpty()}">
-
+<h1 class="display-4 font-weight-normal">Actualité :</h1>
+<p th:if="${articles.isEmpty()}">Liste d'article vide !</p>
+<table class="table" th:unless="${articles.isEmpty()}">
+    <tr th:each="article: ${articles}">
+        <td th:text="${article.title}" />
+        <td th:text="${article.category}" />
+        <td th:text="${article.content}" />
+    </tr>
 </table>
+
+<button> </button>
 </body>
 </html>
