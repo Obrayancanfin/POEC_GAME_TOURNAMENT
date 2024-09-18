@@ -50,10 +50,4 @@ public class AuthController {
         }
         return "redirect:/login";
     }
-
-    @RequestMapping("/logout")
-    public String logout(){
-        authService.logout();
-        return "redirect:/login";
-    }
 }
