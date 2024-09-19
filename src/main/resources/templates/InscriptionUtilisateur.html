@@ -26,14 +26,24 @@
     </div>
     <div class="mb-3">
 
-        <label for="repeatedPassword">Repeter le mot de passe :</label>
-        <input type="password" class="form-control" id="repeatedPassword" th:field="*{repeatedPassword}">
-        <span th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}"></span>
+        <label for="repetedPassword">Répéter le mot de passe:</label>
+        <input type="password" class="form-control is-valid" id="repetedPassword" th:if="${user.password == user.repeatedPassword}" th:field="*{repeatedPassword}">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    </div>
 
+    <div class="mb-3">
+        <label for="email">Email:</label>
+        <input type="text" class="form-control" id="email" th:field="*{email}">
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    </div>
+
+    <div class="mb-3">
+        <label for="repeatedEmail">répéter l'émail:</label>
+        <input type="text" class="form-control" id="repetedEmail" th:field="*{repeatedEmail}">
+        <span th:if="${#fields.hasErrors('repeatedEmail')}" th:errors="*{repeatedEmail}"></span>
     </div>
 
     <button class="btn btn-primary" th:text="${'S''inscrire'}"></button>
-    <a class="btn btn-primary" href="/">Annuler</a>
 
 </form>
 </body>
