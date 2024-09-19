@@ -3,7 +3,6 @@ package org.example.game_tournement.Controller;
 import jakarta.servlet.http.HttpSession;
 import org.example.game_tournement.Entity.User;
 import org.example.game_tournement.Service.AuthService;
-import org.example.game_tournement.Service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class AuthController {
+public class authController {
     private final AuthService authService;
     private final HttpSession session;
 
-    public AuthController(AuthService authService, HttpSession session) {
+    public authController(AuthService authService, HttpSession session) {
         this.authService = authService;
         this.session = session;
     }

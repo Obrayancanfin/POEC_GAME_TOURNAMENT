@@ -35,9 +35,12 @@
 <div>
     <!-- Vérifiez si username est présent -->
     <div th:if="${username}">
+
         <p>Bienvenue, <span th:text="${username}"></span>!</p>
-        <p>Rôle: <span th:text="${roles}"></span></p>
+
+
         <a class="btn btn-outline-light btn-lg px-5 m-4" href="/logout">Se déconnecter</a>
+
 
     </div>
 
@@ -47,6 +50,9 @@
         <a class="btn btn-outline-light btn-lg px-5 m-4" href="/login">Se connecter</a>
     </div>
 </div>
+
+<a class="btn btn-outline-light btn-lg px-5 m-4" href="/Actualite">Actualité</a>
+
 
 <a class="btn btn-outline-light btn-lg px-5 m-4" href="/tournois">Voir les tournois</a>
 

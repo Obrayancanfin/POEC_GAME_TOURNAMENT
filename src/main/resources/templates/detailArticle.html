@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <span th:replace="~{Accueil :: bootstrapImports}"></span>
+    <title th:text="${article.title}+':'"></title>
+</head>
+<body>
+<span th:replace="~{Accueil :: BoostrapCSSPattenDebut}"></span>
+
+
+        <h1 th:text="${article.title}"></h1>
+        <div th:utext="${article.content}"></div>
+
+<a th:href="@{/editArticle/{id}(id=${article.id})}"  class="btn btn-outline-light btn-lg px-5 m-4" th:if="${user != null && user.roles.contains('ADMIN')}">Éditer l'article</a>
+
+<a href="/Actualite" class="btn btn-outline-light btn-lg px-5 m-4">Actualité</a>
+<span th:replace="~{Accueil :: BoostrapCSSPattenFin}"></span>
+
+</body>
+</html>

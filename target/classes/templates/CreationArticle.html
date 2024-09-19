@@ -12,6 +12,42 @@
 </head>
 
 <span th:replace="~{Accueil :: BoostrapCSSPattenDebut}"></span>
+
+<form th:action="@{/creationArticle}" method="post" th:object="${article}">
+
+    <h2 class="fw-bold mb-2 text-uppercase">Creation d'article :</h2>
+    <p class="text-white-50 mb-5">Veuillez remplir les champs.</p>
+
+    <div class="row mb-3">
+        <label for="title" class="form-label" >Titre :</label>
+        <div class="form-outline mb-4">
+            <input type="text" class="form-control form-control-lg" id="title" th:field="*{title}" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid' : ''">
+            <span class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="category" class="form-label" >Categorie :</label>
+        <div class="form-outline mb-4">
+            <input type="text" class="form-control form-control-lg" id="category" th:field="*{category}" th:classappend="${#fields.hasErrors('category')} ? 'is-invalid' : ''">
+            <span class="invalid-feedback" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="content" class="form-label" >Contenu de l'article :</label>
+        <div class="form-outline mb-4">
+            <textarea class="form-control form-control-lg" rows="5" id="content" th:field="*{content}" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid' : ''"></textarea>
+            <span class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-light btn-lg px-5 m-4" >Creer un article </button>
+
+    <a class="btn btn-outline-light btn-lg px-5 t-2 m-4" href="/Actualite">Annuler</a>
+
+</form>
+
 <span th:replace="~{Accueil :: BoostrapCSSPattenFin}"></span>
 
 <body>

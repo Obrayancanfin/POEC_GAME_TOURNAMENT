@@ -17,7 +17,7 @@
     <tr th:each="article: ${articles}">
         <td th:text="${article.title}" />
         <td th:text="${article.category}" />
-        <td th:text="${article.content}" />
+        <td ><a th:href="@{/detailArticle/{id}(id=${article.getId()})}" class="btn btn-success">Voir détail</a></td>
     </tr>
 </table>
 
@@ -25,7 +25,7 @@
 
 <a class="btn btn-outline-light btn-lg px-5 m-4" href="/tournois">Voir les tournois</a>
 
-<a href="/addArticle" class="btn btn-outline-light btn-lg px-5 m-4" th:if="${user != null && user.roles.contains('ADMIN')}">Création article</a>
+<a href="/creationArticle" class="btn btn-outline-light btn-lg px-5 m-4" th:if="${user != null && user.roles.contains('ADMIN')}">Création article</a>
 
 <span th:replace="~{Accueil :: BoostrapCSSPattenFin}"></span>
 

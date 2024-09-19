@@ -6,6 +6,8 @@
     <span th:replace="~{Accueil :: bootstrapImports}"></span>
 </head>
 <body>
+
+<span th:replace="~{Accueil :: BoostrapCSSPattenDebut}"></span>
 <h1>Détails du Tournoi</h1>
 
 <div class="card">
@@ -21,10 +23,11 @@
         <p th:text="${tournoi.rules}">Règles du tournoi</p>
     </div>
 </div>
+
 <a th:href="@{/update/{tournamentID}(tournamentID=${tournoi.id})}" class="btn btn-warning" aria-disabled="true" th:if="${user != null && user.roles.contains('ADMIN')}">Mise à jour</a>
 <a th:href="@{/deletetournoi/{id}(id=${tournoi.id})}" class="btn btn-danger" th:if="${user != null && user.roles.contains('ADMIN')}">Suppression</a>
-
-
 <a href="/tournois" class="btn btn-outline-light btn-lg px-5 m-4">Retour à la liste des tournois</a>
+
+<span th:replace="~{Accueil :: BoostrapCSSPattenFin}"></span>
 </body>
 </html>

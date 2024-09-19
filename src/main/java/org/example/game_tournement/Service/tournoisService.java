@@ -21,8 +21,8 @@ public class tournoisService {
         return tournamentsRepository.findById(id).orElse(null);
     }
 
-    public Tournament addTournament(Tournament tournament) {
-        return tournamentsRepository.save(tournament);
+    public void addTournament(Tournament tournament) {
+        tournamentsRepository.save(tournament);
     }
 
     public void deleteTournament(Tournament tournament) {
