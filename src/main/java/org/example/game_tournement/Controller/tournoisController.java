@@ -1,7 +1,6 @@
 package org.example.game_tournement.Controller;
 
 
-
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.game_tournement.Entity.Article;
@@ -73,13 +72,16 @@ public class tournoisController {
     }
 
     @PostMapping("/savetournoi")
-    private String creationTournoi(@Valid @ModelAttribute("tournoi") Tournament tournoi, BindingResult bindingResult) {
+    private String creationTournoi(@Valid @ModelAttribute("tournoi") Tournament tournoi, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("isUpdate", false);
+
             return "CreationTournoi";
         }
         tournoisService.addTournament(tournoi);
         return "redirect:/tournois";
     }
+
 
     //Read One
     @RequestMapping("detailtournois/{tournoiID}")
@@ -95,7 +97,37 @@ public class tournoisController {
         return "detailtournois";
     }
 
-    //Update
+    // Update - GET
+    @RequestMapping("/update/{tournamentID}")
+    public String update(@PathVariable("tournamentID") int id, Model model) {
+        String username = (String) session.getAttribute("username");
+        User user = authService.getUserByName(username);
+        if (user != null && user.getRoles().equals("ADMIN")) {
+            Tournament tournament = tournoisService.getTournamentById(id);
+            model.addAttribute("tournoi", tournament);
+            model.addAttribute("isUpdate", true);
+            System.out.println("au début");
+            System.out.println(tournament);
+            return "CreationTournoi";
+        }
+        return "redirect:/tournois";
+    }
+
+    // Update - POST
+    @PostMapping("/update/{tournamentID}")
+    public String updateTournament(@PathVariable("tournamentID") int id,
+                                   @Valid @ModelAttribute("tournament") Tournament tournament,
+                                   BindingResult bindingResult,
+                                   Model model) {
+        if (bindingResult.hasErrors()) {
+            return "CreationTournoi";
+        }
+        tournament.setId(id); // Assurez-vous que l'ID est bien mis à jour
+        System.out.println("a la fin");
+        System.out.println(tournament);
+        tournoisService.addTournament(tournament);
+        return "redirect:/detailtournois/" + tournament.getId();
+    }
 
     //Delete
     @RequestMapping("/deletetournoi/{id}")

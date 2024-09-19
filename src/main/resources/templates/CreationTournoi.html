@@ -10,7 +10,7 @@
 <span th:replace="~{Accueil :: BoostrapCSSPattenDebut}"></span>
 <h1>Création d'un tournoi</h1>
 
-<form th:action="@{/savetournoi}" th:object="${tournoi}" method="post">
+<form th:action="${isUpdate} ? @{/update/{tournamentID}(tournamentID=${tournoi.id})} : @{/savetournoi}"  th:object="${tournoi}" method="post">
     <!-- Nom -->
     <div class="row mb-3">
         <label for="name" class="col-sm-2 col-form-label">Nom</label>
@@ -45,7 +45,8 @@
     <div class="row mb-3">
         <label for="date" class="col-sm-2 col-form-label">Date</label>
         <div class="col-sm-10">
-            <input type="date" class="form-control" id="date" th:field="*{dateTournament}" th:classappend="${#fields.hasErrors('dateTournament')} ? 'is-invalid' : ''">
+            <input type="date" class="form-control form-control-lg" id="date" th:field="*{dateTournament}" th:value="${tournoi.dateTournament}" th:classappend="${#fields.hasErrors('dateTournament')} ? 'is-invalid' : ''">
+
             <span class="invalid-feedback" th:if="${#fields.hasErrors('dateTournament')}" th:errors="*{dateTournament}"></span>
         </div>
     </div>
