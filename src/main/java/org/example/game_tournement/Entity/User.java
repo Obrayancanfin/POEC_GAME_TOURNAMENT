@@ -27,6 +27,15 @@ public class User {
     @Transient private String repeatedPassword; // @Transient --> non-persistence en BDD
     private String avatarPath; // En partant du principe que l'on stockera les avatars hors BDD pour l'instant (en local dans l'appli)
 
+    @NotBlank(message = "L ' email est obligatoire")
+    @Length(min = 8, max = 40, message = "l'email doit contenir au moins 6 caractéres")
+    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "L'email doit etre du  format *@*.*")
+
+    private String email;
+
+    @Transient
+    private String repeatedEmail;
+
     @Builder.Default
     private String roles = "USER";
 
