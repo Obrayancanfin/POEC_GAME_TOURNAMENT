@@ -21,11 +21,10 @@
         <p th:text="${tournoi.rules}">Règles du tournoi</p>
     </div>
 </div>
-<!--<a href="/tournois" class="btn btn-warning" aria-disabled="true" >Mise à jour </a>-->
-
+<a th:href="@{/update/{tournamentID}(tournamentID=${tournoi.id})}" class="btn btn-warning" aria-disabled="true" th:if="${user != null && user.roles.contains('ADMIN')}">Mise à jour</a>
 <a th:href="@{/deletetournoi/{id}(id=${tournoi.id})}" class="btn btn-danger" th:if="${user != null && user.roles.contains('ADMIN')}">Suppression</a>
 
 
-<a href="/tournois" class="btn btn-primary">Retour à la liste des tournois</a>
+<a href="/tournois" class="btn btn-outline-light btn-lg px-5 m-4">Retour à la liste des tournois</a>
 </body>
 </html>

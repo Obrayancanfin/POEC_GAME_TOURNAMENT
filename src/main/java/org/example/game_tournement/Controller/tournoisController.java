@@ -32,12 +32,17 @@ public class tournoisController {
 
     @Autowired
     AuthService authService;
+    @Autowired
+    private UserController userController;
 
     //Read ALL
     @RequestMapping("/Actualite")
     private String pageActualite(Model model) {
+        String username = (String) session.getAttribute("username");
+        User user = authService.getUserByName(username);
         List<Article> articles = ArticleService.getAllArticles();
         model.addAttribute("articles", articles);
+        model.addAttribute("user", user);
         return "Actualite";
     }
 

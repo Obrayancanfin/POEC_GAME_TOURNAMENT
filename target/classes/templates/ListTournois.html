@@ -6,10 +6,13 @@
     <span th:replace="~{Accueil :: bootstrapImports}"></span>
 </head>
 <body>
+
+<span th:replace="~{Accueil :: BoostrapCSSPattenDebut}"></span>
 <h1>Liste des tournois</h1>
 
+<p th:if="${tournois.isEmpty()}">Pas de tournois</p>
 
-<table class="table">
+<table th:unless="${tournois.isEmpty()}" class="table">
 
     <thead>
     <tr>
@@ -32,9 +35,9 @@
 </table>
 
 
-<a href="/addtournoi" class="btn btn-primary" th:if="${user != null && user.roles.contains('ADMIN')}">Création tournoi</a>
+<a href="/addtournoi" class="btn btn-outline-light btn-lg px-5 m-4" th:if="${user != null && user.roles.contains('ADMIN')}">Création tournoi</a>
 
-<a href="/" class="btn btn-primary">Accueil</a>
-
+<a href="/" class="btn btn-outline-light btn-lg px-5 m-4">Accueil</a>
+<span th:replace="~{Accueil :: BoostrapCSSPattenFin}"></span>
 </body>
 </html>

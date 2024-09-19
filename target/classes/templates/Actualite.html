@@ -8,9 +8,11 @@
     <span th:replace="~{Accueil :: bootstrapImports}"></span>
     <title>Actualité</title>
 </head>
+
+<span th:replace="~{Accueil :: BoostrapCSSPattenDebut}"></span>
 <body>
 <h1 class="display-4 font-weight-normal">Actualité :</h1>
-<p th:if="${articles.isEmpty()}">Liste d'article vide !</p>
+<p th:if="${articles.isEmpty()}">Il n'y a pas d'article !</p>
 <table class="table" th:unless="${articles.isEmpty()}">
     <tr th:each="article: ${articles}">
         <td th:text="${article.title}" />
@@ -19,8 +21,13 @@
     </tr>
 </table>
 
-<a class="btn btn-primary" href="/">Accueil</a>
-<a class="btn btn-primary" href="/tournois">Voir les tournois</a>
-    
+<a class="btn btn-outline-light btn-lg px-5 m-4" href="/">Accueil</a>
+
+<a class="btn btn-outline-light btn-lg px-5 m-4" href="/tournois">Voir les tournois</a>
+
+<a href="/addArticle" class="btn btn-outline-light btn-lg px-5 m-4" th:if="${user != null && user.roles.contains('ADMIN')}">Création article</a>
+
+<span th:replace="~{Accueil :: BoostrapCSSPattenFin}"></span>
+
 </body>
 </html>

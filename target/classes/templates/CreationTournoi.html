@@ -6,9 +6,11 @@
     <span th:replace="~{Accueil :: bootstrapImports}"></span>
 </head>
 <body>
+
+<span th:replace="~{Accueil :: BoostrapCSSPattenDebut}"></span>
 <h1>Création d'un tournoi</h1>
 
-<form th:action="@{/savetournoi}" th:object="${tournoi}" method="post">
+<form th:action="${isUpdate} ? @{/update/{tournamentID}(tournamentID=${tournoi.id})} : @{/savetournoi}"  th:object="${tournoi}" method="post">
     <!-- Nom -->
     <div class="row mb-3">
         <label for="name" class="col-sm-2 col-form-label">Nom</label>
@@ -43,23 +45,24 @@
     <div class="row mb-3">
         <label for="date" class="col-sm-2 col-form-label">Date</label>
         <div class="col-sm-10">
-            <input type="date" class="form-control" id="date" th:field="*{dateTournament}" th:classappend="${#fields.hasErrors('dateTournament')} ? 'is-invalid' : ''">
+            <input type="date" class="form-control form-control-lg" id="date" th:field="*{dateTournament}" th:value="${tournoi.dateTournament}" th:classappend="${#fields.hasErrors('dateTournament')} ? 'is-invalid' : ''">
+
             <span class="invalid-feedback" th:if="${#fields.hasErrors('dateTournament')}" th:errors="*{dateTournament}"></span>
         </div>
     </div>
 
     <!-- Nombre Limite de Joueurs -->
     <div class="row mb-3">
-        <label for="numberLimitePlayer" class="col-sm-2 col-form-label">Nombre Limite de Joueurs</label>
+        <label for="numberLimitePlayer" class="form-label">Nombre Limite de Joueurs :</label>
         <div class="col-sm-10">
-            <input type="number" class="form-control" id="numberLimitePlayer" th:field="*{numberLimitePlayer}" th:classappend="${#fields.hasErrors('numberLimitePlayer')} ? 'is-invalid' : ''">
+            <input type="number" class="form-control form-control-lg" id="numberLimitePlayer" th:field="*{numberLimitePlayer}" th:classappend="${#fields.hasErrors('numberLimitePlayer')} ? 'is-invalid' : ''">
             <span class="invalid-feedback" th:if="${#fields.hasErrors('numberLimitePlayer')}" th:errors="*{numberLimitePlayer}"></span>
         </div>
     </div>
 
     <!-- Format -->
     <fieldset class="row mb-3">
-        <legend class="col-form-label col-sm-2 pt-0">Format</legend>
+        <legend class="form-label">Format :</legend>
         <div class="col-sm-10">
             <div class="form-check">
                 <input class="form-check-input" type="radio" id="gridRadios1" th:field="*{format}" value="Simple">
@@ -91,11 +94,14 @@
     </div>
 
     <!-- Bouton de soumission -->
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-    
+    <button type="submit" class="btn btn-outline-light btn-lg px-5 m-4">Enregistrer</button>
+
+    <a class="btn btn-outline-light btn-lg px-5 m-4" href="/">Annuler</a>
 </form>
 
-    <a class="btn btn-primary" href="/">Annuler</a>
-    
+
+
+<span th:replace="~{Accueil :: BoostrapCSSPattenFin}"></span>
+
 </body>
 </html>

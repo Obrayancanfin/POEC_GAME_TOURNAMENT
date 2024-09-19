@@ -44,16 +44,19 @@ public class AuthController {
     @PostMapping("/login")
     public String connexionForm(@ModelAttribute("username") String username,
                                 @ModelAttribute("password") String password){
+        if (username.isEmpty() && password.isEmpty()){
+            return "connexion-form";
+        }
         boolean connected = authService.login(username, password);
         if(connected){
             return "redirect:/Actualite";
         }
-        return "redirect:/login";
+        return "connexion-form";
     }
 
     @RequestMapping("/logout")
     public String logout(){
         authService.logout();
-        return "redirect:/login";
+        return "redirect:/";
     }
 }
