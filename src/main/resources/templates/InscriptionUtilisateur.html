@@ -39,7 +39,7 @@
 
     <div class="mb-3">
         <label for="repeatedEmail">répéter l'émail:</label>
-        <input type="text" class="form-control" id="repetedEmail" th:field="*{repeatedEmail}">
+        <input type="text" class="form-control" id="repeatedEmail" th:field="*{repeatedEmail}">
         <span th:if="${#fields.hasErrors('repeatedEmail')}" th:errors="*{repeatedEmail}"></span>
     </div>
 
