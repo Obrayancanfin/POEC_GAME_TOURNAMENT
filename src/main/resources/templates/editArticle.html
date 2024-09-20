@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <span th:replace="~{Accueil :: bootstrapImports}"></span>
+    <title th:text="'Modification de l article : '+${article.title}"></title>
+
+</head>
+<body>
+
+
+<span th:replace="~{Accueil :: BoostrapCSSPattenDebut}"></span>
+
+<form method="post" th:action="@{/editArticle/{id}(id=${article.id})}">
+<label for="title" class="form-label">Modifier le titre de l'article :</label>
+    <input id="title" type="text" name="title" th:value="${article.title}" class="form-control form-control-lg" >
+
+<label for="category" class="form-label">Modifier la catégorie :</label>
+    <input type="text" id="category" name="category" th:value="${article.category}" class="form-control form-control-lg" >
+
+<label for="content" class="form-label">Contenu a modifier :</label>
+    <textarea id="content" name="content" th:text="${article.content}" class="form-control form-control-lg" rows="10"></textarea>
+
+<button type="submit" class="btn btn-outline-light btn-lg px-5 m-4" >Modifier un article </button>
+
+<a class="btn btn-outline-light btn-lg px-5 t-2 m-4" th:href="@{/detailArticle/{id}(id=${article.id})}">Annuler</a>
+
+</form>
+
+<span th:replace="~{Accueil :: BoostrapCSSPattenFin}"></span>
+
+</body>
+</html>

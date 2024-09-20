@@ -2,6 +2,7 @@ package org.example.game_tournement.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.example.game_tournement.Entity.User;
 
 public class UserValidator implements ConstraintValidator<ValidUser, String> {
     @Override
@@ -22,4 +23,9 @@ public class UserValidator implements ConstraintValidator<ValidUser, String> {
 
         return true;
     }
+
+    public boolean isValid(User user, ConstraintValidatorContext context) {
+        return user.getEmail() != null && user.getEmail().equals(user.getRepeatedEmail());
+    }
+
 }
